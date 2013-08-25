@@ -1,6 +1,6 @@
 module.exports = {
     mongodb: {
-        username: 'test',
+        username: 'p6vital',
         password: 'test',
         url: 'paulo.mongohq.com:10076',
         dbname: 'test',

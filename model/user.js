@@ -8,25 +8,28 @@ var userSchema = new Schema({
     name: {
         type: String,
         required: true,
-        validate: [{
-            validator: function(value, respond) {
-                if (value && value.length < 3) {
-                    return respond(false);
-                }
+        validate: [
+            {
+                validator: function (value, respond) {
+                    if (value && value.length < 3) {
+                        return respond(false);
+                    }
 
-                respond(true);
+                    respond(true);
+                },
+                msg: 'name is too short.'
             },
-            msg: 'name is too short.'
-        }, {
-            validator: function(value, respond) {
-                if (value && value.length > 50) {
-                    return respond(false);
-                }
+            {
+                validator: function (value, respond) {
+                    if (value && value.length > 50) {
+                        return respond(false);
+                    }
 
-                respond(true);
-            },
-            msg: 'name is too long.'
-        }]
+                    respond(true);
+                },
+                msg: 'name is too long.'
+            }
+        ]
     },
 
     email: {
@@ -37,7 +40,11 @@ var userSchema = new Schema({
     gender: {
         type: String,
         required: true
-    }
+    },
+
+    api_keys: [
+        {api_key: String}
+    ]
 
 });
 

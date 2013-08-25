@@ -8,6 +8,6 @@ module.exports = {
         getURI: function() {
             return 'mongodb://' + this.username + ':' + this.password + '@' + this.url + '/' + this.dbname;
         }
-    },
+    }
 
 }

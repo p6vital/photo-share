@@ -41,20 +41,22 @@ function migrate(scripts, order, callback) {
 
     var version = order[0];
     console.log('Running ' + scripts[version] + '...');
-    require('../db/' + scripts[version]);
-    var migration = new Migration({version: version, date: new Date(), name: scripts[version]});
-    migration.save(function (error, migration) {
-        if (error) {
-            throw new Error(error);
-        }
-        console.log('Done.');
+    var run = require('../db/' + scripts[version]);
+    run(function(){
+        var migration = new Migration({version: version, date: new Date(), name: scripts[version]});
+        migration.save(function (error, migration) {
+            if (error) {
+                throw new Error(error);
+            }
+            console.log('Done.');
 
-        // Remove executed script
-        delete scripts[order.shift()];
+            // Remove executed script
+            delete scripts[order.shift()];
 
-        // Call itself recursively to ensure the order
-        migrate(scripts, order, callback);
+            // Call itself recursively to ensure the order
+            migrate(scripts, order, callback);
 
+        });
     });
 }
 
